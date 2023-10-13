@@ -47,5 +47,30 @@ void main() {
         expect(bounds1.hashCode, bounds2.hashCode);
       });
     });
+
+    group('LatLngBounds.center', () {
+      test(
+        'should calculate center point #1',
+        () async {
+          final bounds = LatLngBounds(const LatLng(-77.45, -171.16), const LatLng(46.64, 25.88));
+          final center = bounds.center;
+          expect(center.latitude, greaterThanOrEqualTo(-90));
+          expect(center.latitude, lessThanOrEqualTo(90));
+          expect(center.longitude, greaterThanOrEqualTo(-180));
+          expect(center.longitude, lessThanOrEqualTo(180));
+        },
+      );
+      test(
+        'should calculate center point #2',
+        () async {
+          final bounds = LatLngBounds(const LatLng(-0.87, -179.86), const LatLng(84.92, 23.86));
+          final center = bounds.center;
+          expect(center.latitude, greaterThanOrEqualTo(-90));
+          expect(center.latitude, lessThanOrEqualTo(90));
+          expect(center.longitude, greaterThanOrEqualTo(-180));
+          expect(center.longitude, lessThanOrEqualTo(180));
+        },
+      );
+    });
   });
 }

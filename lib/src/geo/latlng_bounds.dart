@@ -118,7 +118,15 @@ class LatLngBounds {
     final lambda3 = lambda1 + math.atan2(by, math.cos(phi1) + bx);
 
     // phi3 and lambda3 are actually in radians and LatLng wants degrees
-    return LatLng(radianToDeg(phi3), radianToDeg(lambda3));
+    var latitude = radianToDeg(phi3);
+    if (latitude > 90) latitude = 90;
+    if (latitude < -90) latitude = -90;
+
+    var longitude = radianToDeg(lambda3);
+    if (longitude > 180) longitude = 180;
+    if (longitude < -180) longitude = -180;
+
+    return LatLng(latitude, longitude);
   }
 
   /// Checks whether [point] is inside bounds
